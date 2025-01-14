@@ -69,8 +69,6 @@ const CourseDescription = ({ user }) => {
 
               <p>{course.description}</p>
 
-              <p>Let's get started with course At ₸{course.price}</p>
-
               {user && user.subscription.includes(course._id) ? (
                 <button
                   onClick={() => navigate(`/course/study/${course._id}`)}
@@ -84,6 +82,25 @@ const CourseDescription = ({ user }) => {
                   className="common-btn"
                 >
                   Get Started
+                </button>
+              )}
+
+              {user && user.subscription.includes(course._id) && (
+                <button
+                  onClick={() => navigate(`/quiz/${course.quizId}`)}
+                  className="common-btn"
+                >
+                  Take Quiz
+                </button>
+              )}
+
+              {user && user.role === "admin" && (
+                <button
+                  onClick={() => navigate(`/admin/create-quiz/${course._id}`)}
+                  className="common-btn"
+                  style={{ background: "blue" }}
+                >
+                  Create Quiz
                 </button>
               )}
             </div>

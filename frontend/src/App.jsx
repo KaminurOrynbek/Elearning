@@ -1,4 +1,3 @@
-// filepath: /Elearning/frontend/src/App.jsx
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -23,6 +22,10 @@ import AdminUsers from './admin/Users/AdminUsers';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import YoutubeSearch from './pages/youtubeSearch/YoutubeSearch';
+import Quiz from './pages/quiz/Quiz';
+import QuizResults from './pages/quiz/QuizResults';
+import UpdateRole from './pages/admin/UpdateRole';
+import CreateQuiz from './pages/admin/CreateQuiz';
 
 const App = () => {
   const { isAuth, user, loading } = UserData();
@@ -51,6 +54,10 @@ const App = () => {
             <Route path="/admin/course" element={isAuth ? <AdminCourses user={user} /> : <Login />} />
             <Route path="/admin/users" element={isAuth ? <AdminUsers user={user} /> : <Login />} />
             <Route path="/youtube-search" element={isAuth ? <YoutubeSearch /> : <Login />} />
+            <Route path="/quiz/:id" element={isAuth ? <Quiz user={user} /> : <Login />} />
+            <Route path="/quiz/results/:id" element={isAuth ? <QuizResults user={user} /> : <Login />} />
+            <Route path="/admin/update-role" element={isAuth && user.mainrole === "superadmin" ? <UpdateRole user={user} /> : <Login />} />
+            <Route path="/admin/create-quiz/:courseId" element={isAuth && user.role === "admin" ? <CreateQuiz user={user} /> : <Login />} />
           </Routes>
           <Footer />
         </BrowserRouter>

@@ -29,13 +29,13 @@ const CourseCard = ({ course }) => {
       }
     }
   };
+
   return (
     <div className="course-card">
       <img src={`${server}/${course.image}`} alt="" className="course-image" />
       <h3>{course.title}</h3>
       <p>Instructor- {course.createdBy}</p>
       <p>Duration- {course.duration} weeks</p>
-      <p>Price- ₸{course.price}</p>
       {isAuth ? (
         <>
           {user && user.role !== "admin" ? (
@@ -74,12 +74,31 @@ const CourseCard = ({ course }) => {
       <br />
 
       {user && user.role === "admin" && (
+        <>
+          <button
+            onClick={() => deleteHandler(course._id)}
+            className="common-btn"
+            style={{ background: "red" }}
+          >
+            Delete
+          </button>
+          <button
+            onClick={() => navigate(`/admin/create-quiz/${course._id}`)}
+            className="common-btn"
+            style={{ background: "blue" }}
+          >
+            Create Quiz
+          </button>
+        </>
+      )}
+
+      {user && user.quizResults.some(result => result.quiz.toString() === course.quizId?.toString()) && (
         <button
-          onClick={() => deleteHandler(course._id)}
+          onClick={() => navigate(`/quiz/results/${course.quizId}`)}
           className="common-btn"
-          style={{ background: "red" }}
+          style={{ background: "green" }}
         >
-          Delete
+          Show My Results
         </button>
       )}
     </div>

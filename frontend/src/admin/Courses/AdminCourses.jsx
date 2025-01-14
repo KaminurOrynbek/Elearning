@@ -24,7 +24,6 @@ const AdminCourses = ({ user }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
   const [createdBy, setCreatedBy] = useState("");
   const [duration, setDuration] = useState("");
   const [image, setImage] = useState("");
@@ -54,7 +53,6 @@ const AdminCourses = ({ user }) => {
     myForm.append("title", title);
     myForm.append("description", description);
     myForm.append("category", category);
-    myForm.append("price", price);
     myForm.append("createdBy", createdBy);
     myForm.append("duration", duration);
     myForm.append("file", image);
@@ -75,7 +73,6 @@ const AdminCourses = ({ user }) => {
       setDuration("");
       setImagePrev("");
       setCreatedBy("");
-      setPrice("");
       setCategory("");
     } catch (error) {
       toast.error(error.response.data.message);
@@ -116,14 +113,6 @@ const AdminCourses = ({ user }) => {
                   type="text"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  required
-                />
-
-                <label htmlFor="text">Price</label>
-                <input
-                  type="number"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
                   required
                 />
 

@@ -3,6 +3,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDb } from './database/db.js';
 import cors from 'cors';
+import quizRoutes from './routes/quiz.js';
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use('/api', userRoutes);
 app.use('/api', courseRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', youtubeRoutes);
+app.use('/api', quizRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
